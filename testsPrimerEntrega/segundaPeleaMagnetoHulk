@@ -1,0 +1,16 @@
+import heroes.*
+test "Magneto ataca a Hulk " {
+
+	magneto.ponerCasco()	
+	hulk.molestar()
+	hulk.molestar()
+	hulk.molestar()
+	hulk.molestar()
+	hulk.molestar()
+
+	magneto.atacar(hulk)
+	assert.equals(50,hulk.vida())
+	assert.equals(0,magneto.vida())
+
+
+}
