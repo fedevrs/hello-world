@@ -1,0 +1,10 @@
+import fixture.*
+import heroes.*
+test "Dar valor a amigoX" {
+	var barrendero = fixture.crearTrabajo(aburrido,10000,150)
+	var sim1= fixture.crearSim(hombre,20,buenazo,1000,barrendero,100)
+	var sim2= fixture.crearSim(hombre,22,buenazo,2000,barrendero,150)
+	sim1.hacerAmigo(sim2)
+	assert.equals(75,sim1.valorar(sim2))
+
+}
