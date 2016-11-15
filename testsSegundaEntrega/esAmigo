@@ -1,0 +1,13 @@
+import fixture.*
+import heroes.*
+
+test "Es amigo De" {
+	var camionero = fixture.crearTrabajo(mercenario,15000 , 150)
+ 	var taxista = fixture.crearTrabajo(copado, 12000, 150)
+ 	var sim1 = fixture.crearSim(hombre,23, interesado,1000,camionero,500)
+	var sim2 = fixture.crearSim(hombre,23,buenazo,5000,taxista,500) 
+ 	sim1.hacerAmigo(sim2) 	
+	assert.that(sim1.esAmigo(sim2))
+
+
+}
