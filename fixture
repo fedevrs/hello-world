@@ -1,0 +1,8 @@
+import heroes.*
+object fixture{
+	method crearSim(unSexo,unaEdad,unaPersonalidad,unDinero,unTrabajo,unaFelicidad) = new Sim (unSexo,unaEdad,unaPersonalidad,unDinero,unTrabajo,unaFelicidad)
+	method crearTrabajo(unTipo,unMonto,unaFelicidad) = new Trabajo (unTipo,unMonto,unaFelicidad)
+	method crearMelancolia(unosDias) = new Melancolico (unosDias)
+	method crearEuforico(unosDias) = new Euforico (unosDias)
+	method crearVim(unSexo,unaEdad,unaPersonalidad,unDinero,unTrabajo,unaFelicidad) = new Vim(unSexo,18,unaPersonalidad,unDinero,unTrabajo,unaFelicidad)
+}
