@@ -1,0 +1,23 @@
+import fixture.*
+import heroes.*
+
+test "Amigo mas valorado" {
+var camionero = fixture.crearTrabajo(mercenario,15000 , 150)
+ var taxista = fixture.crearTrabajo(copado, 12000, 150)
+ var sim1 = fixture.crearSim(hombre,23, interesado,1000,camionero,500)
+ var sim2 = fixture.crearSim(hombre,23,buenazo,5000,taxista,500) 
+ var sim3 = fixture.crearSim(mujer,23,peleadoConLaVida,2000,camionero,500)
+ var sim4 = fixture.crearSim(mujer, 23,superficial,10000,camionero,500)
+ sim1.hacerAmigo(sim2)
+ sim1.hacerAmigo(sim3)
+ sim1.hacerAmigo(sim4)
+ sim3.hacerAmigo(sim4)
+ sim4.hacerAmigo(sim2)
+ 
+ assert.equals(1200, sim1.valorar(sim4))
+ assert.equals(30, sim1.valorar(sim3))
+  assert.equals(0, sim1.valorar(sim2))
+ 
+ assert.equals(sim4,sim1.masValorado())
+	
+}
