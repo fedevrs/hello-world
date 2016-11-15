@@ -1,0 +1,30 @@
+import heroes.*
+test "molestar a hulk y que wolverine lo ataque" {
+
+	assert.equals(100, wolverine.vida())
+	assert.equals(50, hulk.vida())
+	
+	hulk.molestar()
+	hulk.molestar()
+	
+	wolverine.atacar(hulk)
+	
+	assert.equals(0, wolverine.vida())
+	assert.equals(50, hulk.vida())
+	
+	hulk.resetear()
+	wolverine.resetear()
+	
+	assert.equals(100, wolverine.vida())
+	assert.equals(50, hulk.vida())
+	
+	hulk.molestar()
+	hulk.molestar()
+	hulk.molestar()
+	hulk.molestar()
+	
+	wolverine.atacar(hulk)
+	
+	assert.equals(0, wolverine.vida())
+	assert.equals(50, hulk.vida())
+}
