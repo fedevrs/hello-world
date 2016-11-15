@@ -1,0 +1,15 @@
+import fixture.*
+import heroes.*
+
+test "Dispuesto a prestar" {
+
+	
+ 	var taxista = fixture.crearTrabajo(copado, 12000, 150)
+ 	var sinTecho = fixture.crearTrabajo(desocupado, 12000, 150)
+	
+	var sim2 = fixture.crearSim(hombre,23,buenazo,5000,taxista,500) 
+	var sim3 = fixture.crearSim(hombre,23,buenazo,1000,sinTecho,23) 
+	
+	assert.equals(2500,sim2.dispuestoAPagar(sim3))
+ 	
+}
