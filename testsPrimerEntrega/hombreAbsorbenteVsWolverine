@@ -1,0 +1,11 @@
+import heroes.*
+test "hombre absorbente ataca a wolverine" {
+
+	assert.equals(100, wolverine.vida())
+	assert.equals(50, hombreAbsorbente.vida())
+	
+	hombreAbsorbente.atacar(wolverine)
+	
+	assert.equals(100, wolverine.vida())
+	assert.equals(0, hombreAbsorbente.vida())
+}
