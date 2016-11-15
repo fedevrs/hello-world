@@ -1,0 +1,9 @@
+Primer entrega
+
+Punto 4:
+La respuesta sería cambiar la variable que hay en hulk que actualmente es "culpa" por "experiencia", esto lo haríamos con un setter.
+
+Segunda Entrega
+¿Como podría un sim convertirse en un vim?
+Para esto tendríamos que hacer una superclase y que tanto vim como sim sean subclases, entonces en la superclase habría una variable 
+para saber si se trata de un sim o de un vim.
