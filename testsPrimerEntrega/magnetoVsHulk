@@ -1,0 +1,10 @@
+import heroes.*
+test "Magneto ataca a Hulk por sorpresa" {
+
+	magneto.ponerCasco()	
+	magneto.atacar(hulk)
+	assert.equals(0,hulk.vida())
+	assert.equals(100,magneto.vida())
+
+
+}
