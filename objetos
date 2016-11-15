@@ -1,0 +1,1228 @@
+object fuerza {
+	
+	method aplicar(heroe,enemigo){
+		if(enemigo.vida()>39){
+			enemigo.vida(enemigo.vida()-40)	
+		}
+		else{
+			enemigo.vida(0)
+		}
+	}
+	
+	method esAgresivo(){
+		return true
+	}
+}
+
+
+object vuelo{
+	
+	method aplicar(heroe,enemigo){
+		
+		heroe.vida(heroe.vida()+20)
+		
+	}
+	
+	method esAgresivo(){
+		return true
+	}
+}
+
+
+object telequinesis{
+	
+	method aplicar(heroe,enemigo){
+		if(heroe.vida()>0){
+			heroe.vida(heroe.vida()-1)
+		}
+		else{
+			heroe.vida(0)
+		}
+		if(enemigo.vida()>49){
+			enemigo.vida(enemigo.vida()-50)
+		}
+		else{
+			enemigo.vida(0)
+		}
+		
+	}
+	method esAgresivo(){
+		return true
+	}
+}
+
+object objetosCortantes{
+	
+	method aplicar(heroe,enemigo){
+		if(enemigo.vida()>29){
+			enemigo.vida(enemigo.vida()-30)			
+		}
+		else{
+			enemigo.vida(0)
+		}
+	}
+	method esAgresivo(){
+		return true
+	}
+}
+
+
+object culpa{
+	
+	method aplicar(heroe,poderesEnemigo){
+		if(heroe.vida()>4){
+			heroe.vida(heroe.vida()-5)			
+		}
+		else{
+			heroe.vida(0)
+		}
+	}
+	
+}
+
+
+object experiencia{
+	
+	method aplicar(heroe,poderesEnemigo){
+		
+		heroe.vida(heroe.vida()+10)
+		
+	}
+	
+}
+
+object absorcion{
+	
+	method aplicar(heroe,poderesEnemigo){
+		
+		heroe.poderes().addAll(poderesEnemigo)
+		
+	}
+	
+}
+
+object caraDeNaipe{
+	
+	method aplicar(heroe,poderesEnemigo){
+		
+				
+	}
+	
+}
+
+
+object hulk{
+
+	var vida = 50
+	var reaccion= culpa	
+	const poderes = []
+	var dinero=500
+	const amigos=[]
+	
+	method amigos(){
+		return amigos
+	}
+	method popularidad(){
+		return 0
+	}
+	method dinero(){
+		return dinero
+	}
+	method dinero(unDinero){
+		dinero=unDinero
+	}
+	method agregarDinero(unMonto){
+		dinero+=unMonto
+	}
+	method quitarDinero(unMonto){
+		dinero-=unMonto
+	}
+	method felicidad(){
+		return 0
+	}
+	method vida(){
+		return vida
+	}
+	method vida(unaVida){
+		vida = unaVida
+	}
+	
+	method molestar(){		
+		poderes.add(fuerza)
+		vida = 50 +poderes.size()*100
+		
+	}
+	
+	method terapiaHipnosisRegresiva(){
+		reaccion=experiencia
+	}
+	
+	
+	method poderes(){
+		return poderes
+	}
+	
+	method calmar(){
+		vida= 50
+		poderes.clear()	
+		
+	}
+	method vivo(){
+		return vida>0
+	}
+	method atacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())	
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()
+			} else{
+				enemigo.contraAtacar(self)
+			}			
+		}
+		
+	}
+	method contraAtacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	
+	method resetear(){
+		vida=50
+		poderes.clear()
+	}
+	method muerto(){
+		poderes.clear()
+	}
+	method reaccionAtaque(){
+		
+	}
+	method esRaro(){
+		return true
+	}
+	method defenderSim(unSim){
+		self.vida((self.vida()-unSim.dinero()).max(0))
+		if(self.vivo()){
+			self.atacarSim(unSim)
+		}
+	}
+	method atacarSim(unSim){
+		if(unSim.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,unSim)})
+			reaccion.aplicar(self,unSim.poderes())	
+			if(!unSim.vivo()){
+				self.resetear()
+			} else{
+				unSim.defenderHeroe(self)
+			}			
+		}
+	}
+	
+}
+
+
+object wolverine{
+	var vidaOriginal=100
+	var vida = 100
+	var reaccion= caraDeNaipe
+	const poderes = [fuerza,objetosCortantes]
+	var dinero=500
+	const amigos=[]
+	
+	method amigos(){
+		return amigos
+	}
+	method popularidad(){
+		return 0
+	}
+	method dinero(){
+		return dinero
+	}
+	method dinero(unDinero){
+		dinero=unDinero
+	}
+	method agregarDinero(unMonto){
+		dinero+=unMonto
+	}
+	method quitarDinero(unMonto){
+		dinero-=unMonto
+	}
+	method felicidad(){
+		return 0
+	}
+	method vida(){
+		return vida
+	}
+	method vida(unaVida){
+		vida = unaVida
+	}	
+	
+	
+	method poderes(){
+		return poderes
+	}
+	
+	
+	method vivo(){
+		return vida>0
+	}
+	method atacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}	
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	method contraAtacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	
+	method resetear(){
+		vida=100		
+	}
+	method muerto(){		
+	}
+	method reaccionAtaque(){
+		if(vidaOriginal-vida !=0){
+			if(vida>0){
+				if(vida>65){
+					vida=100
+				}
+				else{
+					vida=(vida+35)
+				}
+			}
+		}
+		
+	}
+	method esRaro(){
+		return true
+	}
+	method defenderSim(unSim){
+		self.vida((self.vida()-unSim.dinero()).max(0))
+		if(self.vivo()){
+			self.atacarSim(unSim)
+		}
+	}
+	method atacarSim(unSim){
+		if(unSim.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,unSim)})
+			reaccion.aplicar(self,unSim.poderes())	
+			if(!unSim.vivo()){
+				self.resetear()
+			} else{
+				unSim.defenderHeroe(self)
+			}			
+		}
+	}
+}
+
+
+
+object hombreAbsorbente{
+	
+	
+	var vida = 50
+	var reaccion= absorcion
+	const poderes = [fuerza]
+	var dinero=500
+	const amigos=[]
+	
+	method amigos(){
+		return amigos
+	}
+	method popularidad(){
+		return 0
+	}
+	method dinero(){
+		return dinero
+	}
+	method dinero(unDinero){
+		dinero=unDinero
+	}
+	method agregarDinero(unMonto){
+		dinero+=unMonto
+	}
+	method quitarDinero(unMonto){
+		dinero-=unMonto
+	}
+	method felicidad(){
+		return 0
+	}
+	method vida(){
+		return vida
+	}
+	method vida(unaVida){
+		vida = unaVida
+	}	
+	
+	
+	method poderes(){
+		return poderes
+	}
+
+	
+	method vivo(){
+		return vida>0
+	}
+	method atacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}
+			
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	method contraAtacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}	
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	
+	method resetear(){
+		vida=50
+		poderes.clear()
+		poderes.add(fuerza)		
+	}
+	method muerto(){		
+	}
+	method reaccionAtaque(){
+	}
+	method esRaro(){
+		return true
+	}
+	method defenderSim(unSim){
+		self.vida((self.vida()-unSim.dinero()).max(0))
+		if(self.vivo()){
+			self.atacarSim(unSim)
+		}
+	}
+	method atacarSim(unSim){
+		if(unSim.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,unSim)})
+			reaccion.aplicar(self,unSim.poderes())	
+			if(!unSim.vivo()){
+				self.resetear()
+			} else{
+				unSim.defenderHeroe(self)
+			}			
+		}
+	}
+}
+
+object magneto{
+	
+	var vida = 100
+	var cascoPuesto= false
+	var reaccion= experiencia
+	const poderes = [vuelo,telequinesis,objetosCortantes]
+	var dinero=500
+	const amigos=[]
+	
+	method amigos(){
+		return amigos
+	}
+	method popularidad(){
+		return 0
+	}
+	method dinero(){
+		return dinero
+	}
+	method dinero(unDinero){
+		dinero=unDinero
+	}
+	method agregarDinero(unMonto){
+		dinero+=unMonto
+	}
+	method quitarDinero(unMonto){
+		dinero-=unMonto
+	}
+	
+	method vida(){
+		return vida
+	}
+	method vida(unaVida){
+		vida = unaVida
+	}	
+	
+	
+	method poderes(){
+		return poderes
+	}
+	
+	method felicidad(){
+		return 0
+	}
+	
+	method ponerCasco(){
+		if(!cascoPuesto){
+			vida*=10
+			cascoPuesto=true
+		}		
+	}
+	
+	method sacarCasco(){
+		if(cascoPuesto){
+			vida/=100
+			cascoPuesto=false
+		}
+	}
+	
+	method vivo(){
+		return vida>0
+	}
+	method atacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}	
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	method contraAtacar(enemigo){
+		if(enemigo.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,enemigo)})
+			reaccion.aplicar(self,enemigo.poderes())
+			if( poderes.any({unPoder=>unPoder.esAgresivo()})){
+				enemigo.reaccionAtaque()	
+			}	
+			if(!enemigo.vivo()){
+				self.resetear()
+				enemigo.muerto()				
+			}else{
+				enemigo.contraAtacar(self)
+			}		
+		}
+		
+	}
+	
+	method resetear(){
+		vida=100
+		cascoPuesto = false
+			
+	}
+	method muerto(){		
+	}
+	method reaccionAtaque(){
+	}
+	method esRaro(){
+		return true
+	}
+	method defenderSim(unSim){
+		self.vida((self.vida()-unSim.dinero()).max(0))
+		if(self.vivo()){
+			self.atacarSim(unSim)
+		}
+	}
+	method atacarSim(unSim){
+		if(unSim.vivo()){
+			poderes.forEach({unPoder=>unPoder.aplicar(self,unSim)})
+			reaccion.aplicar(self,unSim.poderes())	
+			if(!unSim.vivo()){
+				self.resetear()
+			} else{
+				unSim.defenderHeroe(self)
+			}			
+		}
+	}
+	
+}
+
+
+class TipoTrabajo{
+	
+	
+	method modificarFelicidad(unSim,unaFelicidad){
+		if(unSim.esBuenazo() && unSim.trabajaConAmigos() ){
+			unSim.agregarFelicidad(unSim.felicidad()*0.1)
+		}
+		
+	}
+	
+	method modificarDinero(unSim,montoFijo)
+	method volverALaNormalidad(unSim){
+		unSim.estadoDeAnimo(normal)
+	}
+	
+}
+
+object copado inherits TipoTrabajo{
+	
+	
+	
+	override method modificarFelicidad(unSim,unaFelicidad){
+		super(unSim,unaFelicidad)
+		unSim.agregarFelicidad(unaFelicidad)		
+	}
+	
+	override method modificarDinero(unSim,montoFijo){
+		unSim.agregarDinero(montoFijo)
+	}
+	method salario(unSim,montoFijo){
+		return montoFijo
+	}
+	
+}
+object mercenario inherits TipoTrabajo{	
+	
+	override method modificarDinero(unSim,montoFijo){
+		unSim.agregarDinero(100+unSim.dinero()*0.02)
+	}
+	method salario(unSim,montoFijo){
+		return 100+unSim.dinero()*0.02
+	}
+}
+object mercenarioSocial inherits TipoTrabajo{
+	override method modificarDinero(unSim,montoFijo){
+		unSim.agregarDinero((100+unSim.dinero()*0.02)+(unSim.amigos()).size())
+	}
+	method salario(unSim,montoFijo){
+		return 100+unSim.dinero()*0.02
+	}
+}
+object aburrido inherits TipoTrabajo{
+	override method modificarFelicidad(unSim,unaFelicidad){
+		super(unSim,unaFelicidad)
+		unSim.quitarFelicidad(unaFelicidad)		
+	}
+	
+	override method modificarDinero(unSim,montoFijo){
+		unSim.agregarDinero(montoFijo)
+	}
+	method salario(unSim,montoFijo){
+		return montoFijo
+	}
+}	
+object aburridoHastaLaMuerte inherits TipoTrabajo{
+	override method modificarFelicidad(unSim,unaFelicidad){
+		super(unSim,unaFelicidad)
+		unSim.quitarFelicidad(2*unaFelicidad)		
+	}
+	
+	override method modificarDinero(unSim,montoFijo){
+		unSim.agregarDinero(montoFijo)
+	}
+	method salario(unSim,montoFijo){
+		return montoFijo
+	}
+}
+object desocupado inherits TipoTrabajo{
+	
+	
+	method salario(unSim,montoFijo){
+		return 0
+	}
+	override method modificarFelicidad(unSim,unaFelicidad){					
+	}
+	
+	override method modificarDinero(unSim,montoFijo){
+	}
+	override method volverALaNormalidad(unSim){}
+	
+}	
+
+class Trabajo{
+	var tipo
+	var felicidad
+	var montoFijo
+	constructor(unTipo,unMonto,unaFelicidad){
+		tipo=unTipo
+		montoFijo=unMonto
+		felicidad=unaFelicidad
+	}
+	method trabajar(unSim){
+		tipo.modificarFelicidad(unSim,felicidad)
+		tipo.modificarDinero(unSim,montoFijo)
+		tipo.volverALaNormalidad(unSim)
+	}
+	method salario(unSim){
+		return tipo.salario(unSim,montoFijo)
+	}
+}
+
+object interesado{
+	method darValor(sim,otroSim){
+		return otroSim.dineroDeAmigos()*0.1
+	}
+	method esBuenazo(){
+		return false
+	}
+	method dispuestoAPrestar(unSim,deudor){
+		return deudor.dinero()
+	}
+	
+}
+object superficial{
+	method darValor(sim,otroSim){
+		return otroSim.popularidad()*20
+	}
+	method esBuenazo(){
+		return false
+	}
+	method dispuestoAPrestar(unSim,deudor){
+		return 10*(unSim.valorar(deudor))
+	}
+}
+
+object buenazo{
+	method darValor(sim,otroSim){
+		return sim.felicidad()/2
+	}
+	method esBuenazo(){
+		return true
+	}
+	method dispuestoAPrestar(unSim,deudor){
+		return 10*(unSim.valorar(deudor))
+	}
+}
+object peleadoConLaVida{
+	method darValor(sim,otroSim){
+		return 0
+	}
+	method esBuenazo(){
+		return false
+	}
+	method dispuestoAPrestar(unSim,deudor){
+		return 10*(unSim.valorar(deudor))
+	}
+}
+object hombre{
+	
+}
+object mujer{
+	
+}
+
+class Sim inherits FuenteDeInformacion{
+	var vida = 80
+	const poderes = []
+	var sexo
+	var edad
+	var nivelFelicidad
+	var dinero	
+	const amigos=[]
+	var personalidad
+	var trabajo
+	var contador =-1
+	var estadoDeAnimo = normal
+	const conocimiento = []
+	const chismes = []
+	const fuentes = []
+	constructor(unSexo,unaEdad,unaPersonalidad,unDinero,unTrabajo,unaFelicidad){
+		edad=unaEdad
+		sexo=unSexo
+		personalidad=unaPersonalidad
+		dinero=unDinero
+		nivelFelicidad=unaFelicidad
+		trabajo=unTrabajo
+	}
+	
+	method estadoDeAnimo(unEstado){
+		estadoDeAnimo=unEstado
+	}
+	method estadoDeAnimo(){
+		return estadoDeAnimo
+	}
+	
+	
+	method agregarFelicidad(felicidad){
+		nivelFelicidad+=felicidad
+	}	
+	
+	method quitarFelicidad(felicidad){
+		
+		nivelFelicidad= (nivelFelicidad-felicidad).max(0)
+	}
+	method trabajar(){
+		estadoDeAnimo.trabajar(self)
+	}	
+	
+	method agregarDinero(unMonto){
+		dinero+=unMonto
+	}
+	method quitarDinero(unMonto){
+		dinero-=unMonto
+	}
+	method dineroEstado(){
+		return dinero
+	}
+	method dinero(){
+		return estadoDeAnimo.dinero(self)
+	}	
+	method personalidadEstado(){
+		return personalidad
+	}
+	method personalidad(){
+		return estadoDeAnimo.personalidad(self)
+	}
+	
+	method trabajoEstado(){
+		return trabajo
+	}
+	method trabajo(){
+		return estadoDeAnimo.trabajo(self)
+	}
+	method esBuenazo(){
+		return estadoDeAnimo.esBuenazo(self)
+	}
+	method felicidadEstado(){
+		return nivelFelicidad
+	}
+	method felicidad(){
+		return estadoDeAnimo.felicidad(self)
+	}
+	
+	
+	method trabajaConAmigos(){
+		if(self.amigos().size()>0){
+			return self.amigos().all({unAmigo=>unAmigo.trabajo()==trabajo})
+		}
+		return false
+	}
+	method esMasPopularQueAmigos(){
+		return estadoDeAnimo.esMasPopularQueAmigos(self)
+	}
+	
+	method valorar(unSim){
+		return estadoDeAnimo.darValor(self,unSim)		
+	}
+	method salario(){
+		return estadoDeAnimo.salario(self)
+	}
+	method amigosEstado(){
+		return amigos
+	}
+	method amigos(){
+		return estadoDeAnimo.amigos(self)
+	}
+	method dineroDeAmigos(){
+		return estadoDeAnimo.dineroDeAmigos(self)
+	}
+	method popularidad(){
+		return estadoDeAnimo.popularidad(self)
+	}
+	method tieneAmigosRaros(){
+		return estadoDeAnimo.tieneAmigosRaros(self)
+	}
+	
+	method esAmigo(unSimAmigo){
+		return estadoDeAnimo.esAmigo(self,unSimAmigo)
+	}
+	method masValorado(){
+		return estadoDeAnimo.masValorado(self)
+	}
+	
+	method hacerAmigo(unAmigo){
+		estadoDeAnimo.hacerAmigo(self,unAmigo)
+	}
+	
+	method esRaro(){
+		return false
+	}
+	method sumarUno(){
+		contador+=1
+		return contador
+		
+	}
+	method ultimosN(unaCantidad){
+		contador=-1
+		var listaAuxiliar=self.amigos().take(self.amigos().size())
+		if(self.amigos().size()>unaCantidad){			
+			(self.amigos().size()-unaCantidad).times({listaAuxiliar.remove(self.amigos().get(self.sumarUno()))})
+			return listaAuxiliar
+		}else{
+			return self.amigos().take(self.amigos().size())
+		}
+	}	
+	
+	method pasarNdias(unosDias){
+		estadoDeAnimo.vivirDias(self,unosDias)
+	}
+	
+	method prestarDinero(deudor,cantidadDinero){
+		estadoDeAnimo.prestarDinero(self,deudor,cantidadDinero)
+	}
+	method dispuestoAPagar(deudor){
+		return estadoDeAnimo.dispuestoAPagar(self,deudor)
+	}
+	method prestar(deudor,cantidadDinero){
+		deudor.agregarDinero(cantidadDinero)
+		self.quitarDinero(cantidadDinero)
+	}
+	override method solicitarConocimiento(unSim){
+		estadoDeAnimo.solicitarConocimiento(self, unSim)
+	}
+	method aprender(unChisme){
+		estadoDeAnimo.aprender(unChisme, self)
+	}
+	method aprenderEstado(unChisme){
+		conocimiento.add(unChisme)
+	}
+	method conocimiento(){
+		return estadoDeAnimo.conocimiento(self)
+	}
+	method conocimientoEstado(){
+		return conocimiento
+	}
+	method chisme(){
+		return estadoDeAnimo.chisme(self)
+	}
+	method chisme(chisme){
+		chismes.add(chisme)
+	}
+	method chismeEstado(){
+		return chismes.anyOne()
+	}
+	method informarse(){
+		estadoDeAnimo.informarse(self)
+	}
+	method fuente(){
+		return estadoDeAnimo.fuente(self)
+	}
+	method fuente(unaFuente){
+		fuentes.add(unaFuente)
+	}
+	method fuenteEstado(){
+		return fuentes
+	}
+	method edad(){
+		return estadoDeAnimo.edad(self)
+	}
+	method edadEstado(){
+		return edad
+	}
+	method cumplirAnios(){
+		edad += 1
+	}
+	method atacarSim(unSim){
+		unSim.defenderSim(self)
+	}
+	method defenderSim(unSim){
+		self.quitarDinero(unSim.dinero())
+	}
+	method atacarHeroe(unHeroe){
+		unHeroe.defenderSim(self)
+	}
+	method vivo(){
+		return vida>0
+	}
+	method vida(){
+		return vida
+	}
+	method vida(unaVida){
+		vida = unaVida
+	}
+	method defenderHeroe(heroe){
+		self.atacarHeroe(heroe)
+	}
+	method poderes(){
+		return poderes
+	}
+}
+
+
+class EstadoDeAnimo{	
+	
+	 method trabajar(unSim){
+		unSim.trabajo().trabajar(unSim)
+	}
+	method dinero(unSim){
+		return unSim.dineroEstado()
+	}
+	method personalidad(unSim){
+		return unSim.personalidadEstado()
+	}
+	method trabajo(unSim){
+		return unSim.trabajoEstado()
+	}
+	method esBuenazo(unSim){
+		return unSim.personalidad().esBuenazo()
+	}
+	method felicidad(unSim){
+		return unSim.felicidadEstado()
+	}
+	method esMasPopularQueAmigos(unSim){
+		return unSim.popularidad()>unSim.amigos().max({unAmigo=>unAmigo.popularidad()}).popularidad()
+	}
+	method darValor(unSim,valorado){
+		return unSim.personalidad().darValor(unSim,valorado)
+	}
+	method salario(unSim){
+		return unSim.trabajo().salario(unSim)
+	}
+	method dineroDeAmigos(unSim){
+		return unSim.amigos().sum({unAmigo=>unAmigo.salario()})
+	}
+	method amigos(unSim){
+		return unSim.amigosEstado()
+	}
+	method popularidad(unSim){
+		return unSim.amigos().sum({unAmigo=>unAmigo.felicidad()})
+	}
+	method tieneAmigosRaros(unSim){
+		return unSim.amigos().any({unAmigo=>unAmigo.esRaro()})
+	}
+	method esAmigo(unSim,unSimAmigo){
+		return unSim.amigos().contains(unSimAmigo)
+	}
+	method masValorado(unSim){
+		return unSim.amigos().max({unAmigo=>unSim.valorar(unAmigo)})
+	}
+	method hacerAmigo(unSim,unSimAmigo){
+		if(unSimAmigo.esRaro()){
+			if(!unSim.tieneAmigosRaros()){
+				unSim.amigos().add(unSimAmigo)
+				unSim.agregarFelicidad(unSim.valorar(unSimAmigo))					
+			}
+		}else{
+			unSim.amigos().add(unSimAmigo)
+			unSim.agregarFelicidad(unSim.valorar(unSimAmigo))	
+		}
+	}
+	method prestarDinero(prestamista,deudor,cantidadDinero){
+		if(prestamista.dinero()>cantidadDinero && cantidadDinero<= prestamista.dispuestoAPagar(deudor)){
+			prestamista.prestar(deudor,cantidadDinero)
+		}else{
+			throw new UserException("No le presta")
+		}
+	}
+	method dispuestoAPagar(unSim,deudor){
+		return unSim.personalidad().dispuestoAPrestar(unSim,deudor)
+	}
+	method solicitarConocimiento(unSim, solicitante){
+		solicitante.aprender(unSim.chisme())
+	}
+	method aprender(unChisme, unSim){
+		unSim.aprenderEstado(unChisme)
+	}
+	method chisme(unSim){
+		return unSim.chismeEstado()
+	}
+	method informarse(unSim){
+		(unSim.fuenteEstado()).forEach({unaFuente => unaFuente.solicitarConocimiento(unSim)})
+	}
+	method fuente(unSim){
+		return unSim.fuenteEstado()
+	}
+	method conocimiento(unSim){
+		return unSim.conocimientoEstado()
+	}
+	method edad(unSim){
+		return unSim.edadEstado()
+	}
+}
+
+object normal inherits EstadoDeAnimo{
+	method vivirDias(unSim,unosDias){
+		
+	}
+}
+
+class Euforico inherits EstadoDeAnimo{
+	var dias
+	constructor(unosDias){
+		dias=unosDias
+	}
+	method vivirDias(unSim,unosDias){
+		dias=(dias-unosDias).max(0)
+		if(dias==0){
+			unSim.estadoDeAnimo(normal)
+		}
+	}
+	override method trabajar(unSim){
+		
+	}
+	override method dinero(unSim){
+		return 0
+	}
+		override method personalidad(unSim){
+		return null
+	}
+	override method trabajo(unSim){
+		return null
+	}
+	override method esBuenazo(unSim){
+		return false
+	}
+	override method felicidad(unSim){
+		return super(unSim)+1000
+	}
+	override method esMasPopularQueAmigos(unSim){
+		return false
+	}
+	override method darValor(unSim,valorado){
+		return 0
+	}
+	override method salario(unSim){
+		return 0
+	}
+	override method dineroDeAmigos(unSim){
+		return 0
+	}
+	override method amigos(unSim){
+		return []
+	}
+	override method popularidad(unSim){
+		return 0
+	}
+	override method tieneAmigosRaros(unSim){
+		return 0
+	}
+	override method esAmigo(unSim,unSimAmigo){
+		return false
+	}
+	override method hacerAmigo(unSim,unSimAmigo){
+		
+	}
+	override method prestarDinero(prestamista,deudor,cantidadDinero){		
+					
+	}
+	override method dispuestoAPagar(unSim,deudor){
+		return 0
+	}
+	override method solicitarConocimiento(solicitante, unSim){
+		
+	}
+	override method aprender(unChisme, unSim){
+		
+	}
+	override method chisme(unSim){
+		return null
+	}
+	override method informarse(unSim){
+	}
+	override method fuente(unSim){
+		return null
+	}
+	override method conocimiento(unSim){
+		return null
+	}
+	override method edad(unSim){
+		return null
+	}
+}
+
+class Melancolico inherits EstadoDeAnimo{
+	var dias
+	constructor(unosDias){
+		dias=unosDias
+	}
+	override method felicidad(unSim){
+		return (super(unSim)-200).max(0)
+	}
+	method vivirDias(unSim,unosDias){
+		dias=(dias-unosDias).max(0)
+		if(dias==0){
+			unSim.estadoDeAnimo(normal)
+		}
+	}
+}
+
+class UserException inherits wollok.lang.Exception {
+	constructor(_mensaje) = super(_mensaje)
+}
+
+class FuenteDeInformacion{
+	method solicitarConocimiento(unSim)
+}
+
+object tinelli inherits FuenteDeInformacion{
+	const informacion = "Totó"
+	override method solicitarConocimiento(unSim){
+		unSim.aprender(informacion)
+	}
+}
+
+object rial inherits FuenteDeInformacion{
+	const informacion = "Escándalo"
+	override method solicitarConocimiento(unSim){
+		unSim.aprender(informacion)
+	}
+}
+
+object libro inherits FuenteDeInformacion{
+	const informacion = [capituloUno, capituloDos, capituloTres]
+	method informacion()= informacion
+	override method solicitarConocimiento(unSim){
+		unSim.aprender((self.informacion()).anyOne())
+	}
+}
+
+object capituloUno{}
+object capituloDos{}
+object capituloTres{}
+
+class Vim inherits Sim{
+	
+	constructor(unSexo,unaEdad,unaPersonalidad,unDinero,unTrabajo,unaFelicidad)=super(unSexo,18,unaPersonalidad,unDinero,unTrabajo,unaFelicidad)
+	
+	override method cumplirAnios(){
+	}
+	
+}
