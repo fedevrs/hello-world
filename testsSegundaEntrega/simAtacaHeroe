@@ -1,0 +1,16 @@
+import fixture.*
+import heroes.*
+
+test "Sim ataca heroe" {
+
+	
+ 	var taxista = fixture.crearTrabajo(copado, 12000, 150)
+	var sim2 = fixture.crearSim(hombre,23,buenazo,5000,taxista,500) 
+	assert.equals(80,sim2.vida())
+	assert.equals(100,magneto.vida())
+	sim2.atacarHeroe(magneto)
+	assert.equals(80,sim2.vida())
+	assert.equals(0,magneto.vida())
+ 	
+ 	
+}
