@@ -1,0 +1,20 @@
+import heroes.*
+import fixture.*
+test "Hacer que un sim cumpla años" {
+	
+	var taxista = fixture.crearTrabajo(copado, 12000, 200)
+	
+	var sim1 = fixture.crearSim	(mujer,30,buenazo,5000,taxista,500)
+	var vim1 = fixture.crearVim (hombre,18,buenazo,1000,taxista,23)
+	
+	
+	assert.equals(30, sim1.edad())
+	assert.equals(18, vim1.edad())
+	
+	sim1.cumplirAnios()
+	vim1.cumplirAnios()
+	
+	assert.equals(31, sim1.edad())
+	assert.equals(18, vim1.edad())
+	
+}
