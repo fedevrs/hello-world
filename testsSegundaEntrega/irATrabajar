@@ -1,0 +1,24 @@
+import fixture.*
+import heroes.*
+
+test "Ir a trabajar" {
+
+	
+ 	var taxista = fixture.crearTrabajo(copado, 12000, 150)
+ 	var sinTecho = fixture.crearTrabajo(desocupado, 12000, 150)
+	
+	var sim2 = fixture.crearSim(hombre,23,buenazo,5000,taxista,500) 
+	var sim3 = fixture.crearSim(hombre,23,buenazo,1000,sinTecho,23) 
+	
+	assert.equals(5000,sim2.dinero())
+	assert.equals(500,sim2.felicidad())
+	sim2.trabajar()
+	assert.equals(17000,sim2.dinero())
+	assert.equals(650,sim2.felicidad())
+	assert.equals(1000,sim3.dinero())
+	assert.equals(23,sim3.felicidad())
+	sim3.trabajar()
+	assert.equals(1000,sim3.dinero())
+	assert.equals(23,sim3.felicidad())
+ 	
+}
