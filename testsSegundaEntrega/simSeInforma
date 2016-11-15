@@ -1,0 +1,29 @@
+import heroes.*
+import fixture.*
+test "Hacer que un sim se informe" {
+	
+	var taxista = fixture.crearTrabajo(copado, 12000, 200)
+	
+	var sim1 = fixture.crearSim	(mujer,22,buenazo,5000,taxista,500)
+	var sim2 = fixture.crearSim (hombre,22,buenazo,1000,taxista,23)
+	
+	
+	assert.that((sim1.conocimiento()).isEmpty())
+	assert.that((sim2.conocimiento()).isEmpty())
+	
+	sim1.fuente(tinelli)
+	sim1.fuente(rial)
+	sim2.fuente(sim1)
+	sim2.fuente(libro)
+	
+	sim1.chisme("Sim4 comió hamburguesas el jueves")
+	
+	sim1.informarse()
+	sim2.informarse()
+	
+	assert.that(not((sim1.conocimiento()).isEmpty()))
+	assert.that(not((sim2.conocimiento()).isEmpty()))
+	
+
+
+}
