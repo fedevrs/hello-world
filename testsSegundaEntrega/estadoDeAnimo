@@ -1,0 +1,18 @@
+import fixture.*
+import heroes.*
+
+test "Sim tiene estado de animo" {
+
+	
+ 	var taxista = fixture.crearTrabajo(copado, 12000, 150)
+	var sim2 = fixture.crearSim(hombre,23,buenazo,5000,taxista,500) 
+	var euforico = fixture.crearEuforico(4)
+	assert.equals(normal,sim2.estadoDeAnimo())
+	sim2.estadoDeAnimo(euforico)
+	assert.equals(euforico,sim2.estadoDeAnimo())
+	sim2.pasarNdias(3)
+	assert.equals(euforico,sim2.estadoDeAnimo())
+	sim2.pasarNdias(1)
+ 	assert.equals(normal,sim2.estadoDeAnimo())
+ 	
+}
