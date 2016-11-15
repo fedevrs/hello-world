@@ -1,0 +1,18 @@
+import heroes.*
+import fixture.*
+test "Heroe ataca a sim" {
+	var taxista = fixture.crearTrabajo(copado, 12000, 200)
+	
+	var sim1 = fixture.crearSim	(mujer,22,buenazo,5000,taxista,500)
+	
+	assert.equals(80, sim1.vida())
+	
+	hulk.atacarSim(sim1)
+	
+	
+	assert.equals(0, hulk.vida())
+
+	
+	
+
+}
