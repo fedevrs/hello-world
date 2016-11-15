@@ -1,0 +1,15 @@
+import heroes.*
+test "Probar Hulk" {	
+//a
+hulk.molestar()
+hulk.molestar()
+assert.equals(250,hulk.vida())
+//b
+hulk.calmar()
+assert.equals(50,hulk.vida())
+//c
+hulk.molestar()
+hulk.molestar()
+hulk.vida(hulk.vida()-10)
+assert.equals(240,hulk.vida())
+}
